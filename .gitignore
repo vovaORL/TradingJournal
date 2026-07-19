@@ -1,0 +1,4 @@
+__pycache__/
+trade_images/
+*.db
+*.sqlite3
