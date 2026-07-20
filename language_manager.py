@@ -42,7 +42,11 @@ class LanguageManager:
                         "btn_file": "📂 Файл",
                         "btn_statistic": "📊 Статистика",
                         "btn_settings": "⚙️ Налаштування",
-                        "combo_lang": "Мова"
+                        "combo_lang": "Мова",
+                        "period_1m": "За місяць",
+                        "period_3m": "За 3 місяці",
+                        "period_6m": "За 6 місяців",
+                        "period_1y": "За рік",
                         },
                     "footer":{
                         "winrate_footer": "Вінрейт: ",
@@ -64,6 +68,9 @@ class LanguageManager:
                         "lbl_wait_trade": "Відк.⏳",
                         "win": "Виграш",
                         "lose": "Програш",
+                        "sort_date_new": "Найновіші",
+                        "sort_date_old": "Найстаріші",
+                        "period_all": "Весь час",
                     },
                     "add_window":{
                         "add_window": "Додати нову угоду",
@@ -129,6 +136,10 @@ class LanguageManager:
                         "btn_statistic": "📊 Statistics",
                         "btn_settings": "⚙️ Settings",
                         "combo_lang": "Language",
+                        "period_1m": "1 month",
+                        "period_3m": "3 months",
+                        "period_6m": "6 months",
+                        "period_1y": "1 year",
                         },
                     "footer":{
                         "winrate_footer": "Winrate: ",
@@ -151,6 +162,9 @@ class LanguageManager:
                         "lbl_wait_trade": "Open ⏳",
                         "win": "Win",
                         "lose": "Lose",
+                        "sort_date_new": "Newer first",
+                        "sort_date_old": "Older first",
+                        "period_all": "All time",
                     },
                     "add_window":{
                         "add_window": "Add New Trade",

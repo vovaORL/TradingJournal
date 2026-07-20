@@ -1,4 +1,5 @@
 import customtkinter as ctk 
+from datetime import datetime, timedelta
 
 
 class TradeFrame(ctk.CTkScrollableFrame):
@@ -11,6 +12,17 @@ class TradeFrame(ctk.CTkScrollableFrame):
 
         self.selected_trade_id = None
         self.selected_trade_frame = None
+
+        self.filter_frame = ctk.CTkFrame(
+                master = self,
+                fg_color="transparent",
+                )
+        self.filter_frame.grid(row = 0, column = 0, columnspan = 11, sticky = "ew", padx = 2, pady = (0, 10))
+
+
+        self.sort_var = ctk.StringVar(value = self.app.get_text("table", "sort_date_new"))
+        self.period_var = ctk.StringVar(value = self.app.get_text("table", "period_all"))
+
 
 
         self.header_frame = ctk.CTkFrame(master = self, fg_color = "transparent")

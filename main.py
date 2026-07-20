@@ -13,12 +13,19 @@ class TradingApp(ctk.CTk):
 
     def __init__(self):
         super().__init__()
-        
+
+
 
         self.db = DatabaseManager()
 
         self.lang_manager = LanguageManager()
         self.current_lang = self.lang_manager.current_lang
+
+
+        
+        self.sort_var = ctk.StringVar(value = self.get_text("table", "sort_date_new"))
+        self.period_var = ctk.StringVar(value = self.get_text("table", "period_all"))
+
 
 
         self.geometry("1000x600")
@@ -29,6 +36,9 @@ class TradingApp(ctk.CTk):
         self.protocol("WM_DELETE_WINDOW", self.close_entrire_app)
 
         self.trades_frame.load_trades()
+
+
+
 
 
 

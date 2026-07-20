@@ -52,6 +52,29 @@ class HeaderFrame(ctk.CTkFrame):
         self.btn_add_pair.bind("<Leave>", self.hide_tooltip)
 
 
+
+        self.combo_period = ctk.CTkOptionMenu(
+                master = self,
+                values = [self.app.get_text('table', 'period_all'), self.app.get_text('settings', 'period_1m'), self.app.get_text('settings', 'period_3m'), self.app.get_text('settings', 'period_6m'), self.app.get_text('settings', 'period_1y')],
+                variable = self.app.period_var,
+                command = lambda val: self.app.trades_frame.apply_filters(),
+                fg_color = "#343638",
+                button_color = "#343638",
+                button_hover_color = "#4A4D50",
+                )
+        self.combo_period.pack(side = "right", padx = 10, pady = 5)
+
+
+        self.combo_sort = ctk.CTkOptionMenu(
+                master = self,
+                values =[self.app.get_text('table', 'sort_date_new'), self.app.get_text('table', 'sort_date_old')],
+                variable = self.app.sort_var,
+                command = lambda val: self.app.trades_frame.apply_filters(),
+                fg_color = "#343638", button_color = "#343638", button_hover_color = "#4A4D50",
+                )
+        self.combo_sort.pack(side = "right", padx = 10, pady = 5)
+
+
     def show_tooltip(self, Event):
         try:
             if not self.btn_add_pair.winfo_exists():
