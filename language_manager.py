@@ -47,6 +47,10 @@ class LanguageManager:
                         "period_3m": "За 3 місяці",
                         "period_6m": "За 6 місяців",
                         "period_1y": "За рік",
+                        "period_custom": "Власний період",
+                        "select_date": "Введіть дати (ДД.ММ.РРРР.):",
+                        "start_date": "З: 01.01.2024",
+                        "finish_date": "До: ",
                         },
                     "footer":{
                         "winrate_footer": "Вінрейт: ",
@@ -140,6 +144,10 @@ class LanguageManager:
                         "period_3m": "3 months",
                         "period_6m": "6 months",
                         "period_1y": "1 year",
+                        "period_custom": "Custom period",
+                        "select_date": "Input date: dd.mm.yy (ex: 22.03.26)",
+                        "start_date": "From: 01.01.2024",
+                        "finish_date": "To: ",
                         },
                     "footer":{
                         "winrate_footer": "Winrate: ",

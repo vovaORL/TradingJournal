@@ -55,9 +55,9 @@ class HeaderFrame(ctk.CTkFrame):
 
         self.combo_period = ctk.CTkOptionMenu(
                 master = self,
-                values = [self.app.get_text('table', 'period_all'), self.app.get_text('settings', 'period_1m'), self.app.get_text('settings', 'period_3m'), self.app.get_text('settings', 'period_6m'), self.app.get_text('settings', 'period_1y')],
+                values = [self.app.get_text('table', 'period_all'), self.app.get_text('settings', 'period_1m'), self.app.get_text('settings', 'period_3m'), self.app.get_text('settings', 'period_6m'), self.app.get_text('settings', 'period_1y'), self.app.get_text('settings', 'period_custom')],
                 variable = self.app.period_var,
-                command = lambda val: self.app.trades_frame.apply_filters(),
+                command = self.handle_period_change,
                 fg_color = "#343638",
                 button_color = "#343638",
                 button_hover_color = "#4A4D50",
@@ -112,6 +112,61 @@ class HeaderFrame(ctk.CTkFrame):
                 self.tooltip_win.destroy()
         except Exception:
             pass
+
+
+    
+
+    def handle_period_change(self, val):
+        from datetime import datetime
+        if val == self.app.get_text('settings', 'period_custom'):
+            self.open_custom_period_window()
+        else:
+            self.app.trades_frame.apply_filters()
+
+
+    
+
+
+    def open_custom_period_window(self):
+        from datetime import datetime
+        if hasattr(self, "custom_period_win") and self.custom_period_win.winfo_exists():
+            self.custom_period_win.focus()
+
+
+        self.custom_period_win = ctk.CTkToplevel(self)
+        self.custom_period_win.title(self.app.get_text("settings", "period_custom"))
+        self.custom_period_win.geometry("300x250")
+        self.custom_period_win.transient()
+        self.custom_period_win.grab_set()
+
+        lbl = ctk.CTkLabel(
+                self.custom_period_win,
+                text = self.app.get_text("settings", "select_date"),
+                font = ("Arial", 14, "bold"),
+                )
+        lbl.pack(pady = (20, 10))
+
+
+        self.entry_start_date = ctk.CTkEntry(
+                self.custom_period_win,
+                placeholder_text = self.app.get_text("settings", "start_date"),
+                width = 200,
+                )
+        self.entry_start_date.pack(pady = 10)
+
+
+
+
+
+        self.entry_end_date = ctk.CTkEntry(
+                self.custom_period_win,
+                text = f'self.app.get_text("settings", "finish_date") {datetime.now().strftime('%d.%m.%Y')}',
+                width = 200,
+                )
+        self.entry_end_date.pack(pady = 10)
+
+
+
 
 
 

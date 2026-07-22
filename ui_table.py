@@ -20,8 +20,6 @@ class TradeFrame(ctk.CTkScrollableFrame):
         self.filter_frame.grid(row = 0, column = 0, columnspan = 11, sticky = "ew", padx = 2, pady = (0, 10))
 
 
-        self.sort_var = ctk.StringVar(value = self.app.get_text("table", "sort_date_new"))
-        self.period_var = ctk.StringVar(value = self.app.get_text("table", "period_all"))
 
 
 

@@ -26,6 +26,9 @@ class TradingApp(ctk.CTk):
         self.sort_var = ctk.StringVar(value = self.get_text("table", "sort_date_new"))
         self.period_var = ctk.StringVar(value = self.get_text("table", "period_all"))
 
+        self.custom_start_date = None
+        self.custom_end_date = None
+
 
 
         self.geometry("1000x600")
