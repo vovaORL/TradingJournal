@@ -147,6 +147,8 @@ class HeaderFrame(ctk.CTkFrame):
         lbl.pack(pady = (20, 10))
 
 
+
+
         self.entry_start_date = ctk.CTkEntry(
                 self.custom_period_win,
                 placeholder_text = self.app.get_text("settings", "start_date"),
@@ -167,7 +169,46 @@ class HeaderFrame(ctk.CTkFrame):
 
 
 
+        btn_apply = ctk.CTkButton(
+                self.custom_period_win,
+                text = self.app.get_text("header", "save_period"),
+                fg_color = "green",
+                command = self.apply_custom_period,
+                )
+        btn_apply.pack(pady = (10, 20))
+        
 
+        self.custom_period_win.protocol("WM_DELETE_WINDOW", self.cancel_custom_period)
+
+
+
+
+
+    def apply_custom_period(self):
+        from datetime import datetime
+        start_str = self.entry_start_date.get().strip()
+        ent_str = self.entry_end_date.get().strip()
+
+
+        try:
+            start_date = datetime.strptime(start_str, "%d.%m.%Y")
+            end_date = datetime.strptime(ent_str, "%d.%m.%Y")
+
+            self.app.custom_start_date = start_date
+            self.app.custom_end_date = end_date.replace(hour = 23, minute = 59, second = 59)
+
+            self.app.trades_frame.apply_filters()
+            self.custom_period_win.destroy()
+        except ValueError:
+            import tkinter.messagebox as mb
+            mb.showerror("Error", "error_date", parent = self.custom_period_win)
+
+
+
+    def cancel_custom_period(self):
+        self.app.period_var.set(self.app.get_text("settings", "period_all"))
+        self.custom_period_win.destroy()
+        self.app.trades_frame.apply_filters()
 
 
 
