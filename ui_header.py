@@ -162,7 +162,7 @@ class HeaderFrame(ctk.CTkFrame):
 
         self.entry_end_date = ctk.CTkEntry(
                 self.custom_period_win,
-                text = f'self.app.get_text("settings", "finish_date") {datetime.now().strftime('%d.%m.%Y')}',
+                placeholder_text = f'{self.app.get_text("settings", "finish_date")} {datetime.now().strftime('%d.%m.%Y')}',
                 width = 200,
                 )
         self.entry_end_date.pack(pady = 10)

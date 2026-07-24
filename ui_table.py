@@ -13,18 +13,14 @@ class TradeFrame(ctk.CTkScrollableFrame):
         self.selected_trade_id = None
         self.selected_trade_frame = None
 
-        self.filter_frame = ctk.CTkFrame(
-                master = self,
-                fg_color="transparent",
-                )
-        self.filter_frame.grid(row = 0, column = 0, columnspan = 11, sticky = "ew", padx = 2, pady = (0, 10))
+        self.row_frames = []
 
 
 
 
 
         self.header_frame = ctk.CTkFrame(master = self, fg_color = "transparent")
-        self.header_frame.grid(row = 0, column = 0, columnspan = 11, sticky = "ew", padx = 2, pady = 5)
+        self.header_frame.grid(row = 0, column = 0, sticky = "ew", padx = 2, pady = 5)
 
         for i in range(11):
             self.header_frame.grid_columnconfigure(i, weight = 1, uniform = "col")
@@ -110,11 +106,18 @@ class TradeFrame(ctk.CTkScrollableFrame):
 
         self.current_row = 1
 
+
+    def apply_filters(self, event = None):
+        self.clear_table()
+        self.load_trades()
+
     def add_row(self, trade_id, val_date, val_assets, val_direction, val_lot_size, val_entry_price, val_exit_price, val_sl, val_rr, val_is_closed, val_outcome, val_profit, val_broker):
 
         row_frame = ctk.CTkFrame(master = self, fg_color = "transparent")
-        row_frame.grid(row = self.current_row, column = 0, columnspan = 11, sticky = "ew", padx = 2, pady = 5)
+        row_frame.grid(row = self.current_row, column = 0, sticky = "ew", padx = 2, pady = 5)
+        
 
+        self.row_frames.append(row_frame)
 
         for i in range(11):
             row_frame.grid_columnconfigure(i, weight = 1, uniform = "col")
@@ -232,9 +235,61 @@ class TradeFrame(ctk.CTkScrollableFrame):
 
 
     def load_trades(self):
-        
+        from datetime import datetime
         rows = self.app.db.get_all_trades()
+
+        sort_val = self.app.sort_var.get()
+        period_val = self.app.period_var.get()
+
+
+        if sort_val == self.app.get_text('table', 'sort_date_new'):
+            rows = sorted(rows, key = lambda x: x[0], reverse = True)
+        else:
+            rows = sorted(rows, key = lambda x: x[0], reverse = False)
+
+
+        filtered_rows = []
+        now = datetime.now()
+
+
+
+
         for row in rows:
+            try:
+                trade_date = datetime.strptime(row[1], "%d.%m.%Y")
+            except ValueError:
+                try:
+                    trade_date = datetime.strptime(row[1], "%d.%m.%Y")
+                except ValueError:
+                    filtered_rows.append(row)
+                    continue
+
+
+            
+            limit_date_start = datetime.min
+            limit_date_end = datetime.max
+            
+
+
+
+            if period_val == self.app.get_text('settings', 'period_1m'):
+                limit_date_start = now - timedelta(days = 30)
+            elif period_val == self.app.get_text('settings', 'period_3m'):
+                limit_date_start = now - timedelta(days = 90)
+            elif period_val == self.app.get_text('settings', 'period_6m'):
+                limit_date_start = now - timedelta(days = 180)
+            elif period_val == self.app.get_text('settings', 'period_1y'):
+                limit_date_start = now - timedelta(days = 365)
+            elif period_val == self.app.get_text('settings', 'period_custom'):
+                if hasattr(self.app, "custom_start_date") and self.app.custom_start_date:
+                    limit_date_start = self.app.custom_start_date
+                    limit_date_end = self.app.custom_end_date
+
+            if limit_date_start <= trade_date <= limit_date_end:
+                filtered_rows.append(row)
+            
+
+        for row in filtered_rows:
             self.add_row(
                     trade_id = row[0],
                     val_date = row[1],
@@ -257,10 +312,9 @@ class TradeFrame(ctk.CTkScrollableFrame):
 
 
     def clear_table(self):
-        for widget in self.winfo_children():
-            if widget != self.header_frame:
-                widget.destroy()
-
+        for row in self.row_frames:
+            row.destroy()
+        self.row_frames.clear()
         self.current_row = 1
 
 
