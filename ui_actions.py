@@ -74,6 +74,7 @@ class ActionsFrame(ctk.CTkFrame):
     def refresh_text(self):
         self.btn_add.configure(text = self.app.get_text("menu", "btn_add"))
         self.btn_delete.configure(text = self.app.get_text("menu", "btn_delete"))
+        self.btn_detali.configure(text = self.app.get_text("menu", "btn_detali"))
 
 
 class AddTradeWindow(ctk.CTkToplevel):

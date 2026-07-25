@@ -262,6 +262,28 @@ class HeaderFrame(ctk.CTkFrame):
         self.btn_file.configure(text = self.app.get_text("settings", "btn_file"))
         self.btn_statistic.configure(text = self.app.get_text("settings", "btn_statistic"))
         self.btn_settings.configure(text = self.app.get_text("settings", "btn_settings"))
+        
+
+        self.combo_period.configure(values = [
+                self.app.get_text("table", "period_all"),
+                self.app.get_text("settings", "period_1m"),
+                self.app.get_text("settings", "period_3m"),
+                self.app.get_text("settings", "period_6m"),
+                self.app.get_text("settings", "period_1y"),
+                self.app.get_text("settings", "period_custom"),
+            ]
+                )
+
+
+        self.combo_sort.configure(
+                values = [
+                    self.app.get_text("table", "sort_date_new"),
+                    self.app.get_text("table", "sort_date_old"),
+                    ]
+                )
+
+        self.app.sort_var.set(self.app.get_text("table", "sort_date_new"))
+        self.app.period_var.set(self.app.get_text("table", "period_all"))
 
 
 
