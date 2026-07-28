@@ -96,6 +96,9 @@ class LanguageManager:
                         "change_window": "Редагування угоди",
                         "btn_save": "💾 Зберегти угоду",
                         },
+                    "statistic":{
+                            'main_metrics': "Головні метрикиi",
+                            },
                     "messagebox":{
                         "messagebox_error": "Будь ласка, заповніть усі поля",
                         "messagebox_error_title": "Помилка",
@@ -199,6 +202,9 @@ class LanguageManager:
                         "change_window": "Edit trade",
                         "btn_save": "💾 Save Trade",
                         },
+                    "statistic":{
+                            'main_metrics': "Main metrics",
+                            },
                     "messagebox":{
                         "messagebox_error": "Please fill in all fields",
                         "messagebox_error_title": "Error",
