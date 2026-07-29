@@ -1,3 +1,32 @@
 import customtkinter as ctk
 
-from 
+from stats_module.tab_general import GeneralStatLab
+from stats_module.tab_segments import SegmentsTab
+from stats_module.tab_charts import ChartsTab
+
+
+class StatisticsWindow(ctk.CTkToplevel):
+    def __init__(self, app):
+        super().__init__(app)
+        self.app = app
+
+        self.title(self.app.get_text('settings', 'btn_statistic'))
+        self.geometry("900x700")
+
+        self.transient()
+        self.grab_set()
+
+        self.tabview = ctk.CTkTabview(self)
+        self.tabview.pack(fill="both", expand=True, padx=10, pady=10)
+
+        self.tab_1_name = self.app.get_text('settings', 'general_diagnoz')
+        self.tab_2_name = self.app.get_text('settings', 'segments')
+        self.tab_3_name = self.app.get_text('settings', 'charts')
+
+        self.tabview.add(self.tab_1_name)
+        self.tabview.add(self.tab_2_name)
+        self.tabview.add(self.tab_3_name)
+
+
+        self.general_tab = GeneralStatLab(master = self.tabview.tab(self.tab_1_name), app = self.app)
+        self.general_tab.pack(fill = "both", expand = True)

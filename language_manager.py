@@ -52,6 +52,10 @@ class LanguageManager:
                         "select_date": "Введіть дати (ДД.ММ.РРРР.):",
                         "start_date": "З: 01.01.2024",
                         "finish_date": "До: ",
+                        "btn_statistic": "Статистика",
+                        "General_diagnoz": "Загальна діагностика",
+                        "segments": "Сегментація",
+                        "charts": "Чарти",
                         },
                     "footer":{
                         "winrate_footer": "Вінрейт: ",
@@ -157,6 +161,10 @@ class LanguageManager:
                         "select_date": "Input date: dd.mm.yy (ex: 22.03.26)",
                         "start_date": "From: 01.01.2024",
                         "finish_date": "To: ",
+                        "btn_statistic": "Statistics",
+                        "General_diagnoz": "General diagnostics",
+                        "segments": "Segments",
+                        "charts": "Charts",
                         },
                     "footer":{
                         "winrate_footer": "Winrate: ",
