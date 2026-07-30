@@ -6,6 +6,7 @@ from ui_actions import ActionsFrame, AddTradeWindow, EditTradeWindow, ManageAsse
 from ui_table import TradeFrame
 from ui_footer import FooterFrame
 from db_manager import DatabaseManager
+from stats_module.ui_statistics import StatisticsWindow
 import os
 
 
@@ -42,7 +43,11 @@ class TradingApp(ctk.CTk):
 
 
 
-
+    def open_statistics_window(self):
+        if hasattr(self, "stat_window") and self.stat_window.winfo_exists():
+            self.stat_window.focus()
+        else:
+            self.stat_window = StatisticsWindow(self)
 
 
     def close_entrire_app(self):

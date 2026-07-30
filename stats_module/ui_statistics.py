@@ -1,8 +1,7 @@
 import customtkinter as ctk
-
 from stats_module.tab_general import GeneralStatLab
-from stats_module.tab_segments import SegmentsTab
-from stats_module.tab_charts import ChartsTab
+#from stats_module.tab_segments import SegmentsTab
+#from stats_module.tab_charts import ChartsTab
 
 
 class StatisticsWindow(ctk.CTkToplevel):

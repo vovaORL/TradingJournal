@@ -53,7 +53,7 @@ class LanguageManager:
                         "start_date": "З: 01.01.2024",
                         "finish_date": "До: ",
                         "btn_statistic": "Статистика",
-                        "General_diagnoz": "Загальна діагностика",
+                        "general_diagnoz": "Загальна діагностика",
                         "segments": "Сегментація",
                         "charts": "Чарти",
                         },

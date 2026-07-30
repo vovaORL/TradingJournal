@@ -1,6 +1,7 @@
 import customtkinter as ctk
 import tkinter as ct
 from PIL import Image
+from stats_module.ui_statistics import StatisticsWindow
 
 class HeaderFrame(ctk.CTkFrame):
     def __init__(self, app):
@@ -26,7 +27,8 @@ class HeaderFrame(ctk.CTkFrame):
         self.btn_statistic = ctk.CTkButton(master = self,
                                            text = self.app.get_text("settings", "btn_statistic"),
                                            font = header_font,
-                                           fg_color = "transparent")
+                                           fg_color = "transparent",
+                                            command = self.app.open_statistics_window)
         self.btn_statistic.pack(side = "left", padx = 2)
 
         self.btn_settings = ctk.CTkButton(master = self,
@@ -73,6 +75,11 @@ class HeaderFrame(ctk.CTkFrame):
                 fg_color = "#343638", button_color = "#343638", button_hover_color = "#4A4D50",
                 )
         self.combo_sort.pack(side = "right", padx = 10, pady = 5)
+
+
+
+
+
 
 
     def show_tooltip(self, Event):
