@@ -185,6 +185,9 @@ class TradingApp(ctk.CTk):
 
         self.footer_frame.update_display(total_trades, winrate, wins, loses, total_lots)
 
+        if hasattr(self, "stat_window") and self.stat_window.winfo_exists():
+            self.stat_window.general_tab.calculate_statistics()
+
 
     def refresh_ui(self):
 

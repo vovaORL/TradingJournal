@@ -29,3 +29,20 @@ class StatisticsWindow(ctk.CTkToplevel):
 
         self.general_tab = GeneralStatLab(master = self.tabview.tab(self.tab_1_name), app = self.app)
         self.general_tab.pack(fill = "both", expand = True)
+
+
+
+
+
+    def refresh_text(self):
+        self.title(self.app.get_text('settings', 'btn_statistic'))
+
+        self.tabview.rename(self.tab_1_name, self.app.get_text('settings', 'general_diagnoz'))
+        self.tabview.rename(self.tab_2_name, self.app.get_text('settings', 'segments'))
+        self.tabview.rename(self.tab_3_name, self.app.get_text('settings', 'charts'))
+
+        self.tab_1_name = self.app.get_text('settings', 'general_diagnoz')
+        self.tab_2_name = self.app.get_text('settings', 'segments')
+        self.tab_3_name = self.app.get_text('settings', 'charts')
+
+        self.general_tab.refresh_text()
