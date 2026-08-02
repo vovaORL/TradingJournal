@@ -15,14 +15,14 @@ class GeneralStatLab(ctk.CTkFrame):
 
 
         self.lbl_title_net, self.lbl_net = self.create_stat_card(self.app.get_text("settings", "stats_net_profit"), "0.00$", 1, 0)
-        self.lbl_title_wr, self.lbl_wr = self.create_stat_card(self.app.get_text("settings", "stats_win_rate"), "0.0%", 1, 1)
+        self.lbl_title_rr, self.lbl_rr = self.create_stat_card(self.app.get_text("settings", "stats_rr"), "1 : 0.00", 1, 1)
 
 
         self.lbl_title_avg_win, self.lbl_avg_win = self.create_stat_card(self.app.get_text("settings", "stats_avg_win"), "+0.00$", 2, 0)
         self.lbl_title_avg_loss, self.lbl_avg_loss = self.create_stat_card(self.app.get_text("settings", "stats_avg_loss"), "-0.00$", 2, 1)
 
 
-        self.lbl_title_total, self.lbl_total = self.create_stat_card(self.app.get_text("settings", "stats_total_trades"), "0", 3, 0)
+        self.lbl_title_wl, self.lbl_wl = self.create_stat_card(self.app.get_text("settings", "stats_wl"), "0", 3, 0)
         self.lbl_title_max, self.lbl_max = self.create_stat_card(self.app.get_text("settings", "stats_max_trades"), "+0.00$ / -0.00$", 3, 1)
 
 
@@ -127,16 +127,19 @@ class GeneralStatLab(ctk.CTkFrame):
 
 
         net_profit = gross_profit - gross_loss
+
+        if avg_loss > 0:
+            rr = avg_win / avg_loss
+        else:
+            rr = avg_win if avg_win > 0 else 0.0
         
 
         if total_trades > 0:
             win_rate = win_count / total_trades
             loss_rate = loss_count / total_trades
             expected_payoff = (win_rate * avg_win) - (loss_rate * avg_loss)
-            win_rate_pct = win_rate * 100
         else:
             expected_payoff = 0
-            win_rate_pct = 0.0
 
         
         self.lbl_pf.configure(text = f"{pf:.2f}", text_color = "#2FA572" if pf >= 1.0 else "#E84A5F")
@@ -145,8 +148,8 @@ class GeneralStatLab(ctk.CTkFrame):
         self.lbl_exp.configure(text = f"{expected_payoff:.2f}$", text_color = "#2FA572" if expected_payoff > 0 else "#E84A5F")
 
         self.lbl_net.configure(text = f"{net_profit:.2f}$", text_color = "#2FA572" if net_profit > 0 else "#E84A5F")
-        self.lbl_wr.configure(text = f"{win_rate_pct:.1f}%", text_color = "#2FA572" if win_rate_pct > 50 else "#E84A5F")
-        self.lbl_total.configure(text = f"{total_trades}", text_color = "white")
+        self.lbl_rr.configure(text = f"{rr:.1f}", text_color = "white")
+        self.lbl_wl.configure(text = f"{win_count}/{loss_count}", text_color = "white")
         self.lbl_max.configure(text = f"+{max_win:.2f}$ / -{max_loss:.2f}$", text_color = "white")
 
 
@@ -156,7 +159,7 @@ class GeneralStatLab(ctk.CTkFrame):
         self.lbl_title_avg_win.configure(text = self.app.get_text("settings", "stats_avg_win"))
         self.lbl_title_avg_loss.configure(text = self.app.get_text("settings", "stats_avg_loss"))
         self.lbl_title_net.configure(text = self.app.get_text("settings", "stats_net_profit"))
-        self.lbl_title_wr.configure(text = self.app.get_text("settings", "stats_win_rate"))
-        self.lbl_title_total.configure(text = self.app.get_text("settings", "stats_total_trades"))
+        self.lbl_title_rr.configure(text = self.app.get_text("settings", "stats_rr"))
+        self.lbl_title_wl.configure(text = self.app.get_text("settings", "stats_wl"))
         self.lbl_title_max.configure(text = self.app.get_text("settings", "stats_max_trades"))
 

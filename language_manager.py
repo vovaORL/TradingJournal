@@ -64,8 +64,8 @@ class LanguageManager:
                         "stats_avg_win": "Середній плюс (Avg Win)",
                         "stats_avg_loss": "Середній мінус (Avg Loss)",
                         "stats_net_profit": "Чистий прибуток (Net)",
-                        "stats_win_rate": "Вінрейт (%)",
-                        "stats_total_trades": "Кількість угод",
+                        "stats_rr": "Risk / Reward (RR)",
+                        "stats_wl": "Перемоги / Поразки",
                         "stats_max_trades": "Max Плюс / Max Мінус",
                         },
                     "footer":{
@@ -184,8 +184,8 @@ class LanguageManager:
                         "stats_avg_win": "Average Win",
                         "stats_avg_loss": "Average Loss",
                         "stats_net_profit": "Net Profit",
-                        "stats_win_rate": "Win Rate (%)",
-                        "stats_total_trades": "Total Trades",
+                        "stats_rr": "Risk / Reward (RR)",
+                        "stats_wl": "Wins / Losses",
                         "stats_max_trades": "Max Win / Max Loss",
                         },
                     "footer":{
