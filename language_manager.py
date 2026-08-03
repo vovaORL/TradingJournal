@@ -26,6 +26,9 @@ class LanguageManager:
                         "add_asset": "Додати пару",
                         "edit_asset_name": "Введіть нову назву",
                         "edit_asset": "Редагування пари",
+                        "manage_brokers": "Керування брокерами",
+                        "broker_name": "Назва брокера",
+                        "btn_add": "Додати",
                         },
                     "settings":{
                         "currency_pair": "Валютні пари",
@@ -67,6 +70,7 @@ class LanguageManager:
                         "stats_rr": "Risk / Reward (RR)",
                         "stats_wl": "Перемоги / Поразки",
                         "stats_max_trades": "Max Плюс / Max Мінус",
+                        "tabview_broker": "Брокери",
                         },
                     "footer":{
                         "winrate_footer": "Вінрейт: ",
@@ -146,6 +150,9 @@ class LanguageManager:
                         "add_asset": "Add pair",
                         "edit_asset_name": "Input new pair name",
                         "edit_asset": "Change pair",
+                        "manage_brokers": "Control of brokers",
+                        "broker_name": "Name of broker",
+                        "btn_add": "Add",
                         },
                     "settings":{
                         "currency_pair": "Currency pair",
@@ -187,6 +194,7 @@ class LanguageManager:
                         "stats_rr": "Risk / Reward (RR)",
                         "stats_wl": "Wins / Losses",
                         "stats_max_trades": "Max Win / Max Loss",
+                        "tabview_broker": "Brokers",
                         },
                     "footer":{
                         "winrate_footer": "Winrate: ",

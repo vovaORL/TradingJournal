@@ -45,6 +45,38 @@ class DatabaseManager():
             self.cursor.executemany('INSERT INTO assets (name) VALUES (?)', default_assets)
             self.conn.commit()
 
+
+
+        self.cursor.execute('''
+                            CREATE TABLE IF NOT EXISTS brokers (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            name TEXT UNIQUE)
+                            ''')
+        self.conn.commit()
+
+    
+
+    def get_all_brokers(self):
+        self.cursor.execute("SELECT name FROM brokers")
+        return [row[0] for row in self.cursor.fetchall()]
+
+
+
+    def add_broker(self, name):
+        try:
+            self.cursor.execute('INSERT INTO brokers (name) VALUES (?)', (name,))
+            self.conn.commit()
+        except:
+            pass
+
+
+
+    def delete_broker(self, name):
+        self.cursor.execute('DELETE FROM brokers WHERE name = ?', (name,))
+        self.conn.commit()
+
+
+
         
     def get_all_assets(self):
         self.cursor.execute('SELECT id, name FROM assets ORDER BY name ASC')

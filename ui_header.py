@@ -2,6 +2,7 @@ import customtkinter as ctk
 import tkinter as ct
 from PIL import Image
 from stats_module.ui_statistics import StatisticsWindow
+from ui_manage_brokers import ManageBrokersFrame
 
 class HeaderFrame(ctk.CTkFrame):
     def __init__(self, app):
@@ -169,7 +170,7 @@ class HeaderFrame(ctk.CTkFrame):
 
         self.entry_end_date = ctk.CTkEntry(
                 self.custom_period_win,
-                placeholder_text = f'{self.app.get_text("settings", "finish_date")} {datetime.now().strftime('%d.%m.%Y')}',
+                placeholder_text = f'{self.app.get_text("settings", "finish_date")} {datetime.now().strftime("%d.%m.%Y")}',
                 width = 200,
                 )
         self.entry_end_date.pack(pady = 10)
@@ -316,6 +317,12 @@ class SettingsWindow(ctk.CTkToplevel):
         self.current_name_balance = self.app.get_text("settings", "tabview_balance")
         self.tab_balance = self.tabview.add(self.current_name_balance)
 
+        self.current_name_broker = self.app.get_text("settings", "tabview_broker")
+        self.tab_broker = self.tabview.add(self.current_name_broker)
+        
+        self.brokers_frame = ManageBrokersFrame(self.tab_broker, self.app)
+        self.brokers_frame.pack(fill = "both", expand = True)
+
         self.current_name_other = self.app.get_text("settings", "tabview_other")
         self.tab_other = self.tabview.add(self.current_name_other)
 
@@ -407,6 +414,7 @@ class SettingsWindow(ctk.CTkToplevel):
 
     def refresh_text(self):
         new_name_balance = self.app.get_text("settings", "tabview_balance")
+        new_name_broker = self.app.get_text("settings", "tabview_broker")
         new_name_other = self.app.get_text("settings", "tabview_other")
 
         active_tab = self.tabview.get()
@@ -418,6 +426,16 @@ class SettingsWindow(ctk.CTkToplevel):
             if active_tab == self.current_name_balance:
                 tab_to_set = new_name_balance
             self.current_name_balance = new_name_balance
+
+
+        if new_name_broker != self.current_name_broker:
+            self.tabview.rename(self.current_name_broker, new_name_broker)
+            if tab_to_set == self.current_name_broker:
+                tab_to_set = new_name_broker
+            self.current_name_broker = new_name_broker
+
+
+
 
         if new_name_other != self.current_name_other:
             self.tabview.rename(self.current_name_other, new_name_other)
@@ -431,6 +449,9 @@ class SettingsWindow(ctk.CTkToplevel):
         self.btn_deposit.configure(text = self.app.get_text("settings", "btn_deposit"))
         self.btn_withdraw.configure(text = self.app.get_text("settings", "btn_withdraw"))
         self.btn_adjust.configure(text = self.app.get_text("settings", "btn_adjust"))
+
+        if hasattr(self, "brokers_frame") and hasattr(self.brokers_frame, "refresh_text"):
+            self.brokers_frame.refresh_text()
 
     def open_deposit(self):
         if hasattr(self, "deposit_win") and self.deposit_win.winfo_exists():

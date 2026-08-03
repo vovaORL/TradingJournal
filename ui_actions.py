@@ -161,14 +161,26 @@ class AddTradeWindow(ctk.CTkToplevel):
 
 
 
+        broker_list = self.app.db.get_all_brokers()
 
+        if not broker_list:
+            broker_list = ["No existing brokers"]
 
-        self.entry_broker = ctk.CTkEntry(master = self.form_frame,
-                                         width = field_width,
-                                         placeholder_text = self.app.get_text("add_window", "entry_broker"),
-                                            fg_color = "#343638",
-                                         )
-        self.entry_broker.grid(row = 4, column = 0, pady = 10, padx = 15)
+        self.broker_var = ctk.StringVar(value = broker_list[0])
+
+        self.combo_broker = ctk.CTkOptionMenu(
+                master = self.form_frame,
+                values = broker_list,
+                variable = self.broker_var,
+                width = field_width,
+                fg_color = "#343638",
+                button_color = "#343638",
+                button_hover_color = "#4A4D50",
+                dropdown_fg_color = "#343638",
+                dropdown_hover_color = "#4A4D50"
+                )
+        self.combo_broker.grid(row = 4, column = 0, pady = 10, padx = 15)
+
 
 
 
@@ -366,7 +378,7 @@ class AddTradeWindow(ctk.CTkToplevel):
         exit_val = self.entry_exit_price.get().strip().replace(',', '.')
         val_sl = self.entry_sl.get().strip().replace(',', '.')
 
-        val_broker = self.entry_broker.get()
+        val_broker = self.combo_broker.get()
 
 
 
@@ -647,13 +659,27 @@ class EditTradeWindow(ctk.CTkToplevel):
 
 
 
+        broker_list = self.app.db.get_all_brokers()
 
-        self.entry_broker = ctk.CTkEntry(master = self.form_frame,
-                                         width = field_width,
-                                         placeholder_text = self.app.get_text("add_window", "entry_broker"),
-                                            fg_color = "#343638",
-                                         )
-        self.entry_broker.grid(row = 4, column = 0, pady = 10, padx = 15)
+        if not broker_list:
+            broker_list = ["No existing brokers"]
+
+        self.broker_var = ctk.StringVar(value = broker_list[0])
+
+        self.combo_broker = ctk.CTkOptionMenu(
+                master = self.form_frame,
+                values = broker_list,
+                variable = self.broker_var,
+                width = field_width,
+                fg_color = "#343638",
+                button_color = "#343638",
+                button_hover_color = "#4A4D50",
+                dropdown_fg_color = "#343638",
+                dropdown_hover_color = "#4A4D50"
+                )
+        self.combo_broker.grid(row = 4, column = 0, pady = 10, padx = 15)
+
+
 
 
 
@@ -785,7 +811,7 @@ class EditTradeWindow(ctk.CTkToplevel):
 
 
         if data[13]:
-            self.entry_broker.insert(0, data[13])
+            self.combo_broker.set(data[13])
 
     def open_image_window(self):
         file_paths = filedialog.askopenfilenames(
@@ -866,7 +892,7 @@ class EditTradeWindow(ctk.CTkToplevel):
         exit_val = self.entry_exit_price.get().strip().replace(',', '.')
         val_sl = self.entry_sl.get().strip().replace(',', '.')
 
-        val_broker = self.entry_broker.get()
+        val_broker = self.combo_broker.get()
 
 
         if exit_val == "":
