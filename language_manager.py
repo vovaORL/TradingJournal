@@ -116,7 +116,14 @@ class LanguageManager:
                         "btn_save": "💾 Зберегти угоду",
                         },
                     "statistic":{
-                            'main_metrics': "Головні метрикиi",
+                        "seg_asset": "Активи",
+                        "seg_dir": "Напрямок",
+                        "seg_session": "Сесія",
+                        "seg_broker": "Брокер",
+                        "seg_no_selection": "Виберіть хоча б один параметр зверху ☝️",
+                        "seg_trades": "Угод:",
+                        "seg_wr": "WR:", 
+                        'main_metrics': "Головні метрикиi",
                             },
                     "messagebox":{
                         "messagebox_error": "Будь ласка, заповніть усі поля",
@@ -241,6 +248,13 @@ class LanguageManager:
                         "btn_save": "💾 Save Trade",
                         },
                     "statistic":{
+                            "seg_asset": "Assets",
+                            "seg_dir": "Direction",
+                            "seg_session": "Session",
+                            "seg_broker": "Broke",
+                            "seg_no_selection": "Select at least one parameter above ☝️",
+                            "seg_trades": "Trades:",
+                            "seg_wr": "WR:", 
                             'main_metrics': "Main metrics",
                             },
                     "messagebox":{

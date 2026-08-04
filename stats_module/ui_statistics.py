@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from stats_module.tab_general import GeneralStatLab
-#from stats_module.tab_segments import SegmentsTab
+from stats_module.tab_segments import SegmentationTab
 #from stats_module.tab_charts import ChartsTab
 
 
@@ -29,6 +29,9 @@ class StatisticsWindow(ctk.CTkToplevel):
 
         self.general_tab = GeneralStatLab(master = self.tabview.tab(self.tab_1_name), app = self.app)
         self.general_tab.pack(fill = "both", expand = True)
+
+        self.segments_tab = SegmentationTab(master = self.tabview.tab(self.tab_2_name), app = self.app)
+        self.segments_tab.pack(fill = "both", expand = True)
 
 
 
