@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from stats_module.tab_general import GeneralStatLab
 from stats_module.tab_segments import SegmentationTab
-#from stats_module.tab_charts import ChartsTab
+from stats_module.tab_charts import ChartsTab
 
 
 class StatisticsWindow(ctk.CTkToplevel):
@@ -33,6 +33,9 @@ class StatisticsWindow(ctk.CTkToplevel):
         self.segments_tab = SegmentationTab(master = self.tabview.tab(self.tab_2_name), app = self.app)
         self.segments_tab.pack(fill = "both", expand = True)
 
+        self.charts_tab = ChartsTab(master = self.tabview.tab(self.tab_3_name), app = self.app)
+        self.charts_tab.pack(fill = "both", expand = True)
+
 
 
 
@@ -48,4 +51,7 @@ class StatisticsWindow(ctk.CTkToplevel):
         self.tab_2_name = self.app.get_text('settings', 'segments')
         self.tab_3_name = self.app.get_text('settings', 'charts')
 
-        self.general_tab.refresh_text()
+        if hasattr(self, "segments_tab") and self.segments_tab.winfo_exists():
+            self.general_tab.refresh_text()
+        if hasattr(self, "charts_tab") and self.charts_tab.winfo_exists():
+            self.charts_tab.refresh_text()
