@@ -4,6 +4,15 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 from datetime import datetime
 
 
+class CustomToolbar(NavigationToolbar2Tk):
+    toolitems = (
+            ('Home', 'Скинути вигляд', 'home', 'home'),
+            ('Pan', 'Переміщення', 'move', 'pan'),
+            ('Zoom', 'Лупа', 'zoom_to_rect', 'zoom'),
+            ('Save', 'Зберегти', 'filesave', 'save_figure'),
+            )
+
+
 
 class ChartsTab(ctk.CTkFrame):
     def __init__(self, master, app):
@@ -129,7 +138,43 @@ class ChartsTab(ctk.CTkFrame):
         ax.title.set_color('white')
 
 
-        ax.plot(x_values, equity, color = '#2FA572', linewidth = 2, marker = 'o', markersize = 4)
+        line, = ax.plot(x_values, equity, color = '#2FA572', linewidth = 2, marker = 'o', markersize = 4)
+
+        annot = ax.annotate(
+                "", xy=(0,0),
+                xytext=(10,10),
+                textcoords="offset points",
+                bbox = dict(boxstyle="round,pad=0.5", fc = "#2b2b2b",
+                ec = "#2FA572", lw = 1),
+                color = "white",
+                fontsize = 10,
+                fontweight = "bold",
+                )
+        annot.set_visible(False)
+
+
+        
+
+        def hover(event):
+            if event.inaxes == ax:
+                cont, ind = line.contains(event)
+                if cont:
+                    index = ind["ind"][0]
+                    x, y = line.get_data()
+
+
+                    annot.xy = (x[index], y[index])
+                    annot.set_text(f"{self.app.get_text('statistic', 'trade')} {x[index]}\n{self.app.get_text('statistic', 'balance')} {y[index]:.2f}$")
+                    annot.set_visible(True)
+                    fig.canvas.draw_idle()
+                else:
+                    if annot.get_visible():
+                        annot.set_visible(False)
+                        fig.canvas.draw_idle()
+        fig.canvas.mpl_connect("motion_notify_event", hover)
+
+
+
 
         ax.axhline(0, color = 'gray', linestyle = '--', linewidth = 1)
 
@@ -138,6 +183,8 @@ class ChartsTab(ctk.CTkFrame):
         ax.set_xlabel(f'{self.app.get_text("statistic", "number_of_trades")}')
         ax.set_ylabel(f'{self.app.get_text("statistic", "equity")}')
         ax.grid(True, color = 'gray', alpha = 0.3)
+
+        fig.tight_layout()
 
 
         self.current_canvas = FigureCanvasTkAgg(fig, master = self.chart_frame)
@@ -148,10 +195,17 @@ class ChartsTab(ctk.CTkFrame):
         widget.pack(fill = "both", expand = True, padx = 10, pady = (10, 0))
 
 
-        self.current_toolbar = NavigationToolbar2Tk(self.current_canvas, self.chart_frame)
+        self.current_toolbar = CustomToolbar(self.current_canvas, self.chart_frame)
         self.current_toolbar.update()
         self.current_toolbar.pack(side = "bottom", fill = "x", padx = 10, pady = 5)
         self.current_toolbar.config(background='#343638')
+
+        for widget in self.current_toolbar.winfo_children():
+            widget.config(background='#343638')
+
+
+        self.current_toolbar._message_label.config(background='#343638', foreground='white')
+
 
 
     def refresh_text(self):

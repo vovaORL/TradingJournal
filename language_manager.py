@@ -131,6 +131,8 @@ class LanguageManager:
                         "profit_dynamics": "Динаміка прибутку",
                         "number_of_trades": "Кількість угод",
                         "equity": "Чистий прибуток ($)",
+                        "trade": "Угода:",
+                        "balance": "Баланс:",
                             },
                     "messagebox":{
                         "messagebox_error": "Будь ласка, заповніть усі поля",
@@ -270,6 +272,8 @@ class LanguageManager:
                         "profit_dynamics": "Dymanic profit",
                         "number_of_trades": "Number of trades",
                         "equity": "Net profit ($)",
+                        "trade": "Trade:",
+                        "balance": "Balance:",
                             },
                     "messagebox":{
                         "messagebox_error": "Please fill in all fields",
