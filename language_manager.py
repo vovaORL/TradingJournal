@@ -133,6 +133,9 @@ class LanguageManager:
                         "equity": "Чистий прибуток ($)",
                         "trade": "Угода:",
                         "balance": "Баланс:",
+                        "pl_chart": "P/L по днях",
+                        "date": "Дата",
+                        "profit": "Чистий прибуток ($)",
                             },
                     "messagebox":{
                         "messagebox_error": "Будь ласка, заповніть усі поля",
@@ -274,6 +277,9 @@ class LanguageManager:
                         "equity": "Net profit ($)",
                         "trade": "Trade:",
                         "balance": "Balance:",
+                        "pl_chart": "P/L in days",
+                        "date": "Date",
+                        "profit": "Profit net($)",
                             },
                     "messagebox":{
                         "messagebox_error": "Please fill in all fields",
